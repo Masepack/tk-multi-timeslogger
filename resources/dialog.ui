@@ -37,7 +37,7 @@
     </widget>
    </item>
    <item row="4" column="1">
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="pushButton_pause">
      <property name="text">
       <string>Pause</string>
      </property>
@@ -55,7 +55,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../sgConfigs/default2test1/tk-multi-timeslogger/resources/resources.qrc">:/res/sg_logo.png</pixmap>
+      <pixmap resource="resources.qrc">:/res/sg_logo.png</pixmap>
      </property>
     </widget>
    </item>
@@ -63,21 +63,21 @@
     <widget class="QWidget" name="widget" native="true"/>
    </item>
    <item row="4" column="4">
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="pushButton_stop">
      <property name="text">
       <string>Stop / Create Log</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="pushButton_start">
      <property name="text">
       <string>Start</string>
      </property>
     </widget>
    </item>
    <item row="0" column="2">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_time">
      <property name="minimumSize">
       <size>
        <width>400</width>
@@ -98,6 +98,7 @@
   </layout>
  </widget>
  <resources>
+  <include location="resources.qrc"/>
   <include location="../../../sgConfigs/default2test1/tk-multi-timeslogger/resources/resources.qrc"/>
  </resources>
  <connections/>

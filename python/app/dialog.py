@@ -48,9 +48,9 @@ class AppDialog(QtGui.QWidget):
         # now load in the UI that was created in the UI designer
         self.ui = Ui_Dialog() 
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.start_timer)
-        self.ui.pushButton_2.clicked.connect(self.stop_and_log)
-        self.ui.pushButton_3.clicked.connect(self.pause_timer)
+        self.ui.pushButton_start.clicked.connect(self.start_timer)
+        self.ui.pushButton_stop.clicked.connect(self.stop_and_log)
+        self.ui.pushButton_pause.clicked.connect(self.pause_timer)
 
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
