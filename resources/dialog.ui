@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
+    <width>814</width>
     <height>406</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>The Current Sgtk Environment</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
+   <item row="2" column="1">
     <widget class="QLabel" name="context">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -36,7 +36,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="4" column="1">
     <widget class="QPushButton" name="pushButton_3">
      <property name="text">
       <string>Pause</string>
@@ -44,20 +44,6 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Start</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3">
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="text">
-      <string>Stop / Create Log</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
     <widget class="QLabel" name="logo_example">
      <property name="maximumSize">
       <size>
@@ -69,17 +55,50 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/sg_logo.png</pixmap>
+      <pixmap resource="../../../sgConfigs/default2test1/tk-multi-timeslogger/resources/resources.qrc">:/res/sg_logo.png</pixmap>
      </property>
     </widget>
    </item>
-   <item row="0" column="2" colspan="2">
+   <item row="2" column="3" colspan="2">
     <widget class="QWidget" name="widget" native="true"/>
+   </item>
+   <item row="4" column="4">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Stop / Create Log</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>700</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../../../sgConfigs/default2test1/tk-multi-timeslogger/resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
