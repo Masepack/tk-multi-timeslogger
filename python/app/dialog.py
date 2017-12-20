@@ -12,6 +12,7 @@ import sgtk
 import os
 import sys
 import threading
+import datetime
 
 # by importing QT from sgtk rather than directly, we ensure that
 # the code will be compatible with both PySide and PyQt.
@@ -47,7 +48,10 @@ class AppDialog(QtGui.QWidget):
         # now load in the UI that was created in the UI designer
         self.ui = Ui_Dialog() 
         self.ui.setupUi(self)
-        
+        self.ui.pushButton.clicked.connect(self.start_timer)
+        self.ui.pushButton_2.clicked.connect(self.stop_and_log)
+        self.ui.pushButton_3.clicked.connect(self.pause_timer)
+
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
         self._app = sgtk.platform.current_bundle()
@@ -59,5 +63,25 @@ class AppDialog(QtGui.QWidget):
         
         # lastly, set up our very basic UI
         self.ui.context.setText("Current Context: %s" % self._app.context)
-        
+
+    """
+    Function for Time Start
+    """
+    def start_timer(self):
+        print "start timer"
+        self.start_time = datetime.datetime.now()
+
+    """
+    Stop Timer and Log Time in Shotgun
+    """
+    def stop_and_log(self):
+        print "Stop Timer, Create Time Log"
+        self.stop_time = datetime.datetime.now()
+        time_delta = self.stop_time - self.start_time
+        print time_delta
+    """
+    Function for Time Pause
+    """
+    def pause_timer(self):
+        print "Timer paused"        
         
