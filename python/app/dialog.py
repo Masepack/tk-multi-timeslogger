@@ -46,7 +46,7 @@ class AppDialog(QtGui.QWidget):
     def showEvent(self, event):
         font = QtGui.QFont()
         font.setPointSize(65)
-        self.ui.label_time.setFont("Al Bayan")
+        self.ui.label_time.setFont(font)
 
     def __init__(self):
         """
@@ -69,8 +69,12 @@ class AppDialog(QtGui.QWidget):
 
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
+
         self._app = sgtk.platform.current_bundle()
-        
+        self.sg = self._app.shotgun
+        self.context = self._app.context
+        print self.sg
+
         # via the self._app handle we can for example access:
         # - The engine, via self._app.engine
         # - A Shotgun API instance, via self._app.shotgun
@@ -88,6 +92,8 @@ class AppDialog(QtGui.QWidget):
         print "start timer"
         self.start_time = datetime.datetime.now()
         self._update_timer.start(1000)
+        print "Context is "
+        print repr(self.context)
 
     """
     Stop Timer and Log Time in Shotgun
@@ -96,17 +102,19 @@ class AppDialog(QtGui.QWidget):
         print "Stop Timer, Create Time Log"
         self.stop_time = datetime.datetime.now()
         time_delta = self.stop_time - self.start_time
-        time_delta_min = self.stop_time - self.start_time
         self._update_timer.stop()
+        time_string_min = (time_delta.seconds // 60) % 60
+        print "Time Logged in Minutes: ",time_string_min
         print time_delta
-        sg = shotgun_api3.Shotgun("https://davidmason.shotgunstudio.com", login="david", password="Masepack01")
+
+
         data = {
-            "project": {"type": "Project", "id": 86},
-            "entity": {"type": "Task", "id": 5731},
+            "project": {"type": "Project", "id": 105},
+            "entity": {"type": "Task", "id": 6699},
             "description": "TimeSlogger Timelog",
-            "duration": 480,
+            "duration": time_string_min,
         }
-        sg.create('TimeLog', data)
+        self.sg.create('TimeLog', data)
     """
     Function for Time Pause
     """
@@ -121,7 +129,4 @@ class AppDialog(QtGui.QWidget):
         time_delta = self.stop_time - self.start_time
         time_string = "{0}:{1}:{2}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
         self.ui.label_time.setText(time_string)
-        time_delta_min = self.stop_time - self.start_time
-        time_string_min = "{1}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
-        print time_string_min
         print time_string
