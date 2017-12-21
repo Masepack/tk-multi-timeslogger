@@ -14,13 +14,10 @@ import sys
 import threading
 import datetime
 
-
-
 # by importing QT from sgtk rather than directly, we ensure that
 # the code will be compatible with both PySide and PyQt.
 from sgtk.platform.qt import QtCore, QtGui
 from .ui.dialog import Ui_Dialog
-
 
 def show_dialog(app_instance):
     """
@@ -33,8 +30,6 @@ def show_dialog(app_instance):
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
     app_instance.engine.show_dialog("SG TimeSlogger", app_instance, AppDialog)
-    
-
 
 class AppDialog(QtGui.QWidget):
     """
@@ -66,7 +61,6 @@ class AppDialog(QtGui.QWidget):
         self._update_timer = QtCore.QTimer(self)
         self._update_timer.timeout.connect(self.update_ticker)
 
-
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
 
@@ -82,9 +76,8 @@ class AppDialog(QtGui.QWidget):
         
         # lastly, set up our very basic UI
         self.ui.context.setText("Current Context: %s" % self._app.context)
-        font = QtGui.QFont()
-        font.setPointSize(65)
-        self.ui.label_time.setFont(font)
+
+    # Start the Timer and Prints the Context in the Shell
     """
     Function for Time Start
     """
@@ -95,6 +88,7 @@ class AppDialog(QtGui.QWidget):
         print "Context is "
         print repr(self.context)
 
+    # Stops the Timer, Creates Time in Minutes, Updates Shotgun with Timelog against Context
     """
     Stop Timer and Log Time in Shotgun
     """
@@ -105,28 +99,30 @@ class AppDialog(QtGui.QWidget):
         self._update_timer.stop()
         time_string_min = (time_delta.seconds // 60) % 60
         print "Time Logged in Minutes: ",time_string_min
-        print time_delta
-
+        print "Time Logged for",self._app.context
 
         data = {
             "project": {"type": "Project", "id": 105},
             "entity": {"type": "Task", "id": 6699},
             "description": "TimeSlogger Timelog",
-            "duration": time_string_min,
+            "duration": time_string_min
         }
         self.sg.create('TimeLog', data)
+
+    # Pause the Running of the Timer /  Add One minute in Dev build
     """
     Function for Time Pause
     """
     def pause_timer(self):
-        print "Timer paused"
+        print "Time set to 1 Minute"
 
+    # Updates the Ticker and Formats it
     """
     Ticker Update
     """
     def update_ticker(self):
         self.stop_time = datetime.datetime.now()
         time_delta = self.stop_time - self.start_time
-        time_string = "{0}:{1}:{2}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
+        time_string = "{0}:{1}:{2}".format(time_delta.seconds//3600,(time_delta.seconds//60)%60,time_delta.seconds)
         self.ui.label_time.setText(time_string)
         print time_string
