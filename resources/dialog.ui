@@ -6,15 +6,36 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>814</width>
-    <height>406</height>
+    <width>467</width>
+    <height>236</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>The Current Sgtk Environment</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="1">
+   <item row="4" column="2">
+    <widget class="QPushButton" name="pushButton_start">
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="pushButton_pause">
+     <property name="text">
+      <string>Pause</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QPushButton" name="pushButton_stop">
+     <property name="text">
+      <string>Stop / Create Log</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
     <widget class="QLabel" name="context">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -36,15 +57,41 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <widget class="QPushButton" name="pushButton_pause">
+   <item row="1" column="2">
+    <widget class="QLabel" name="label_time">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>75</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>500</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>65</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>Pause</string>
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="1" column="1">
     <widget class="QLabel" name="logo_example">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>75</height>
+      </size>
+     </property>
      <property name="maximumSize">
       <size>
        <width>100</width>
@@ -59,41 +106,19 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="3" colspan="2">
-    <widget class="QWidget" name="widget" native="true"/>
-   </item>
-   <item row="4" column="4">
-    <widget class="QPushButton" name="pushButton_stop">
-     <property name="text">
-      <string>Stop / Create Log</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QPushButton" name="pushButton_start">
-     <property name="text">
-      <string>Start</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QLabel" name="label_time">
+   <item row="3" column="2">
+    <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
-       <width>400</width>
-       <height>100</height>
+       <width>0</width>
+       <height>25</height>
       </size>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>700</width>
-       <height>100</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
+     <zorder>label_time</zorder>
     </widget>
+   </item>
+   <item row="4" column="1" rowspan="3">
+    <widget class="QWidget" name="widget_2" native="true"/>
    </item>
   </layout>
  </widget>

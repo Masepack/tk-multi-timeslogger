@@ -52,6 +52,11 @@ class AppDialog(QtGui.QWidget):
         self.ui.pushButton_stop.clicked.connect(self.stop_and_log)
         self.ui.pushButton_pause.clicked.connect(self.pause_timer)
 
+        # timer stuff
+        self._update_timer = QtCore.QTimer(self)
+        self._update_timer.timeout.connect(self.update_ticker)
+
+
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
         self._app = sgtk.platform.current_bundle()
@@ -70,6 +75,7 @@ class AppDialog(QtGui.QWidget):
     def start_timer(self):
         print "start timer"
         self.start_time = datetime.datetime.now()
+        self._update_timer.start(1000)
 
     """
     Stop Timer and Log Time in Shotgun
@@ -78,10 +84,20 @@ class AppDialog(QtGui.QWidget):
         print "Stop Timer, Create Time Log"
         self.stop_time = datetime.datetime.now()
         time_delta = self.stop_time - self.start_time
+        self._update_timer.stop()
         print time_delta
     """
     Function for Time Pause
     """
     def pause_timer(self):
-        print "Timer paused"        
-        
+        print "Timer paused"
+
+    """
+    Ticker Update
+    """
+    def update_ticker(self):
+        self.stop_time = datetime.datetime.now()
+        time_delta = self.stop_time - self.start_time
+        time_string = "{0}:{1}:{2}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
+        self.ui.label_time.setText(time_string)
+        print time_string

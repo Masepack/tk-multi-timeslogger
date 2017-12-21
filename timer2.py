@@ -7,4 +7,4 @@ b = datetime.datetime.now()
 
 time.sleep(1)
 
-print (datetime.datetime.now() - b)
+print (datetime.datetime.now() - b).strftime("%H:%M:%S")
