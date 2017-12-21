@@ -12,7 +12,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.setEnabled(True)
-        Dialog.resize(415, 224)
+        Dialog.resize(415, 226)
         self.gridLayout = QtGui.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.pushButton_start = QtGui.QPushButton(Dialog)
@@ -53,10 +53,11 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.context.sizePolicy().hasHeightForWidth())
         self.context.setSizePolicy(sizePolicy)
-        self.context.setMaximumSize(QtCore.QSize(140, 50))
+        self.context.setMinimumSize(QtCore.QSize(300, 15))
+        self.context.setMaximumSize(QtCore.QSize(500, 50))
         self.context.setAlignment(QtCore.Qt.AlignCenter)
         self.context.setObjectName("context")
-        self.gridLayout.addWidget(self.context, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.context, 3, 2, 1, 1)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
