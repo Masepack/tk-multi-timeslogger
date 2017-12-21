@@ -14,10 +14,13 @@ import sys
 import threading
 import datetime
 
+
+
 # by importing QT from sgtk rather than directly, we ensure that
 # the code will be compatible with both PySide and PyQt.
 from sgtk.platform.qt import QtCore, QtGui
 from .ui.dialog import Ui_Dialog
+
 
 def show_dialog(app_instance):
     """
@@ -29,7 +32,7 @@ def show_dialog(app_instance):
     
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
-    app_instance.engine.show_dialog("Starter Template App...", app_instance, AppDialog)
+    app_instance.engine.show_dialog("SG TimeSlogger", app_instance, AppDialog)
     
 
 
@@ -37,7 +40,14 @@ class AppDialog(QtGui.QWidget):
     """
     Main application dialog window
     """
-    
+    """
+    Set Font
+    """
+    def showEvent(self, event):
+        font = QtGui.QFont()
+        font.setPointSize(65)
+        self.ui.label_time.setFont("Al Bayan")
+
     def __init__(self):
         """
         Constructor
@@ -68,7 +78,9 @@ class AppDialog(QtGui.QWidget):
         
         # lastly, set up our very basic UI
         self.ui.context.setText("Current Context: %s" % self._app.context)
-
+        font = QtGui.QFont()
+        font.setPointSize(65)
+        self.ui.label_time.setFont(font)
     """
     Function for Time Start
     """
@@ -84,8 +96,17 @@ class AppDialog(QtGui.QWidget):
         print "Stop Timer, Create Time Log"
         self.stop_time = datetime.datetime.now()
         time_delta = self.stop_time - self.start_time
+        time_delta_min = self.stop_time - self.start_time
         self._update_timer.stop()
         print time_delta
+        sg = shotgun_api3.Shotgun("https://davidmason.shotgunstudio.com", login="david", password="Masepack01")
+        data = {
+            "project": {"type": "Project", "id": 86},
+            "entity": {"type": "Task", "id": 5731},
+            "description": "TimeSlogger Timelog",
+            "duration": 480,
+        }
+        sg.create('TimeLog', data)
     """
     Function for Time Pause
     """
@@ -100,4 +121,7 @@ class AppDialog(QtGui.QWidget):
         time_delta = self.stop_time - self.start_time
         time_string = "{0}:{1}:{2}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
         self.ui.label_time.setText(time_string)
+        time_delta_min = self.stop_time - self.start_time
+        time_string_min = "{1}".format(time_delta.seconds // 3600, (time_delta.seconds // 60) % 60, time_delta.seconds)
+        print time_string_min
         print time_string
