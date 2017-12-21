@@ -102,8 +102,8 @@ class AppDialog(QtGui.QWidget):
         print "Time Logged for",self._app.context
 
         data = {
-            "project": {"type": "Project", "id": 105},
-            "entity": {"type": "Task", "id": 6699},
+            "project": self.context.project,
+            "entity": self.context.task,
             "description": "TimeSlogger Timelog",
             "duration": time_string_min
         }
